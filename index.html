@@ -1,840 +1,256 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MatizJ Spreadsheet - The ultimate spreadsheet for reps, replica products, QC photos, and parcel tracking. Find the best deals and quality checks in one place." />
-  <meta name="keywords" content="MatizJ, spreadsheet, reps, replica, quality check, QC, cheap reps, designer replicas" />
-  <meta name="theme-color" content="#cc0000" />
-  <title>MatizJ Spreadsheet - Best Reps & QC Database</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --red:       #cc0000;
-      --red-hot:   #ff1a1a;
-      --red-dark:  #990000;
-      --black:     #000000;
-      --dark:      #0d0d0d;
-      --dark2:     #141414;
-      --dark3:     #1c1c1c;
-      --dark4:     #242424;
-      --border:    #2a2a2a;
-      --border2:   #333333;
-      --muted:     #666666;
-      --dim:       #999999;
-      --light:     #cccccc;
-      --white:     #ffffff;
-      --font-main: 'Inter', sans-serif;
-      --font-head: 'Space Grotesk', sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--black);
-      color: var(--light);
-      font-family: var(--font-main);
-      font-size: 15px;
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--black);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      height: 56px;
-    }
-
-    .nav-logo {
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 20px;
-      color: var(--white);
-      text-decoration: none;
-      letter-spacing: -0.5px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .nav-logo span {
-      color: var(--red);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .nav-links a {
-      color: var(--dim);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: color 0.15s, background 0.15s;
-    }
-
-    .nav-links a:hover {
-      color: var(--white);
-      background: var(--dark3);
-    }
-
-    .nav-links a.social {
-      color: var(--red);
-      border: 1px solid var(--red-dark);
-    }
-
-    .nav-links a.social:hover {
-      background: var(--red-dark);
-      color: var(--white);
-    }
-
-    .nav-cta {
-      background: var(--red);
-      color: var(--white) !important;
-      border-radius: 6px !important;
-      font-weight: 600 !important;
-      font-size: 12px !important;
-      padding: 7px 14px !important;
-      transition: background 0.15s !important;
-    }
-
-    .nav-cta:hover {
-      background: var(--red-hot) !important;
-      color: var(--white) !important;
-    }
-
-    /* ── HERO ── */
-    .hero {
-      padding: 56px 24px 40px;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(204,0,0,0.12) 0%, transparent 70%);
-    }
-
-    .hero h1 {
-      font-family: var(--font-head);
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.1;
-      letter-spacing: -1px;
-      max-width: 720px;
-      margin: 0 auto 16px;
-    }
-
-    .hero h1 em {
-      font-style: normal;
-      color: var(--red);
-    }
-
-    .hero p {
-      color: var(--dim);
-      max-width: 560px;
-      margin: 0 auto 32px;
-      font-size: 15px;
-    }
-
-    /* ── SEARCH + FILTER BAR ── */
-    .controls {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .search-row {
-      position: relative;
-    }
-
-    .search-row input {
-      width: 100%;
-      background: var(--dark2);
-      border: 1px solid var(--border2);
-      border-radius: 8px;
-      padding: 12px 16px 12px 44px;
-      color: var(--white);
-      font-family: var(--font-main);
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-
-    .search-row input::placeholder { color: var(--muted); }
-    .search-row input:focus { border-color: var(--red); }
-
-    .search-icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      pointer-events: none;
-    }
-
-    .filter-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .cats {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .cat-btn {
-      background: var(--dark3);
-      border: 1px solid var(--border);
-      color: var(--dim);
-      border-radius: 20px;
-      padding: 5px 14px;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.15s;
-      font-family: var(--font-main);
-    }
-
-    .cat-btn:hover, .cat-btn.active {
-      background: var(--red-dark);
-      border-color: var(--red);
-      color: var(--white);
-    }
-
-    .sort-select {
-      background: var(--dark3);
-      border: 1px solid var(--border2);
-      color: var(--light);
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-family: var(--font-main);
-      font-size: 13px;
-      cursor: pointer;
-      outline: none;
-    }
-
-    /* ── MAIN LAYOUT ── */
-    .main {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 0;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    /* ── SIDEBAR ── */
-    aside {
-      border-right: 1px solid var(--border);
-      padding: 28px 20px;
-      position: sticky;
-      top: 56px;
-      height: calc(100vh - 56px);
-      overflow-y: auto;
-    }
-
-    .aside-block {
-      margin-bottom: 32px;
-    }
-
-    .aside-block h3 {
-      font-family: var(--font-head);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--red);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-    }
-
-    .aside-block a {
-      display: block;
-      color: var(--dim);
-      text-decoration: none;
-      font-size: 13px;
-      padding: 6px 0;
-      border-bottom: 1px solid var(--border);
-      transition: color 0.15s;
-    }
-
-    .aside-block a:hover { color: var(--red); }
-    .aside-block a:last-child { border-bottom: none; }
-
-    .aside-block a.red-link {
-      color: var(--red);
-      font-weight: 600;
-    }
-
-    .aside-block a.red-link:hover { color: var(--red-hot); }
-
-    /* ── PRODUCTS GRID ── */
-    .products-area {
-      padding: 28px 24px;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .product-card {
-      background: var(--dark2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color 0.15s, transform 0.15s;
-    }
-
-    .product-card:hover {
-      border-color: var(--red-dark);
-      transform: translateY(-2px);
-    }
-
-    .product-img {
-      width: 100%;
-      aspect-ratio: 1;
-      background: var(--dark3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .product-img .placeholder-icon {
-      font-size: 48px;
-      opacity: 0.15;
-    }
-
-    .product-badge {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: var(--red);
-      color: var(--white);
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .product-info {
-      padding: 12px 14px 14px;
-    }
-
-    .product-cat {
-      font-size: 10px;
-      color: var(--red);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .product-name {
-      font-family: var(--font-head);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1.3;
-      margin-bottom: 8px;
-    }
-
-    .product-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .product-price {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--red);
-    }
-
-    .product-views {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .product-actions {
-      display: flex;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .btn-buy {
-      flex: 1;
-      background: var(--red);
-      color: var(--white);
-      border: none;
-      border-radius: 6px;
-      padding: 7px 0;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: var(--font-main);
-      transition: background 0.15s;
-    }
-
-    .btn-buy:hover { background: var(--red-hot); }
-
-    .btn-qc {
-      background: var(--dark4);
-      color: var(--light);
-      border: 1px solid var(--border2);
-      border-radius: 6px;
-      padding: 7px 10px;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      font-family: var(--font-main);
-      transition: border-color 0.15s, color 0.15s;
-    }
-
-    .btn-qc:hover { border-color: var(--red-dark); color: var(--red); }
-
-    /* ── MODAL ── */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-overlay.open { display: flex; }
-
-    .modal {
-      background: var(--dark2);
-      border: 1px solid var(--border2);
-      border-radius: 12px;
-      max-width: 680px;
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: var(--dark4);
-      border: 1px solid var(--border2);
-      color: var(--light);
-      border-radius: 6px;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-      z-index: 10;
-    }
-
-    .modal-close:hover { background: var(--red-dark); border-color: var(--red); }
-
-    .modal-imgs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: var(--black);
-    }
-
-    .modal-img-slot {
-      aspect-ratio: 1;
-      background: var(--dark3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      opacity: 0.2;
-    }
-
-    .modal-body {
-      padding: 20px 24px 24px;
-    }
-
-    .modal-body h2 {
-      font-family: var(--font-head);
-      font-size: 20px;
-      color: var(--white);
-      margin-bottom: 6px;
-    }
-
-    .modal-stats {
-      display: flex;
-      gap: 20px;
-      margin: 12px 0 20px;
-    }
-
-    .stat {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .stat strong { color: var(--light); display: block; font-size: 14px; }
-
-    .modal-btns {
-      display: flex;
-      gap: 10px;
-    }
-
-    .modal-btns .btn-buy { padding: 10px 24px; font-size: 14px; }
-    .modal-btns .btn-qc { padding: 10px 16px; font-size: 14px; }
-
-    /* ── LOADING STATE ── */
-    .loading-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--muted);
-    }
-
-    .spinner {
-      width: 32px;
-      height: 32px;
-      border: 2px solid var(--border2);
-      border-top-color: var(--red);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      margin: 0 auto 16px;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
-      margin-top: 40px;
-    }
-
-    .footer-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-brand {
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 16px;
-      color: var(--white);
-    }
-
-    .footer-brand span { color: var(--red); }
-
-    .footer-copy {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-    }
-
-    .footer-links a {
-      font-size: 12px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .footer-links a:hover { color: var(--red); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .main { grid-template-columns: 1fr; }
-      aside { display: none; }
-    }
-
-    @media (max-width: 600px) {
-      nav { padding: 0 14px; }
-      .nav-links a:not(.nav-cta):not(.social) { display: none; }
-      .hero { padding: 36px 16px 28px; }
-      .products-area { padding: 20px 14px; }
-      .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MatizJ Spreadsheet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ✏️  TOUT CE QUE TU PEUX MODIFIER EST DANS LE BLOC <script> CI-DESSOUS
+     (tout en haut : SITE, CATEGORIES, PRODUCTS)
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style>
+:root{
+  --bg:#121212; --surface:#1e1e1e; --surface2:#2a2a2a; --border:#333;
+  --fg:#f0f0f0; --fg2:#aaa; --accent:#cc1111; --accent-hover:#ff2222; --nav-bg:#0d0d0d;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{background:var(--nav-bg);border-bottom:3px solid var(--accent);display:flex;align-items:center;justify-content:space-between;padding:16px max(16px,env(safe-area-inset-left,0px));position:relative}
+.logo{font-size:1.5rem;font-weight:800;letter-spacing:.06em;color:#fff;text-transform:uppercase}
+.logo .j{color:var(--accent)}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:var(--fg)}
+.menu{position:absolute;right:12px;top:100%;margin-top:6px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:6px;z-index:60;min-width:200px}
+.menu[hidden]{display:none}
+.menu a{display:block;padding:11px 14px;border-radius:8px;font-weight:600;font-size:.9rem}
+.menu a:hover{background:var(--surface2);color:var(--accent)}
+
+/* HERO */
+.hero{background:#0d0d0d;padding:36px max(16px,env(safe-area-inset-left,0px)) 28px;text-align:center;border-bottom:1px solid var(--border)}
+.hero h1{font-size:clamp(1.6rem,6vw,2.4rem);font-weight:800;color:var(--accent);line-height:1.2;text-wrap:balance}
+
+/* HOW TO BUY */
+.htb-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);background:var(--accent);color:#fff;writing-mode:vertical-rl;padding:14px 8px;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-radius:6px 0 0 6px;z-index:50}
+
+/* FILTRES */
+.filter-box{background:var(--surface2);border-radius:16px;margin:20px max(16px,env(safe-area-inset-left,0px));padding:16px}
+.search-input{width:100%;background:#1a1a1a;border:1px solid var(--border);color:var(--fg);padding:12px 16px;border-radius:10px;font-size:.95rem;font-family:inherit;outline:none;margin-bottom:14px}
+.search-input::placeholder{color:var(--fg2)}
+.search-input:focus{border-color:var(--accent)}
+.cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.cat-pill{background:var(--surface);border:1.5px solid var(--border);color:var(--fg);padding:7px 16px;border-radius:999px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s}
+.cat-pill.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.cat-pill:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.sort-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sort-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;color:var(--fg2);text-transform:uppercase}
+.sort-pill{background:transparent;border:1.5px solid var(--border);color:var(--fg2);padding:6px 16px;border-radius:999px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}
+.sort-pill.active{border-color:var(--accent);color:var(--accent)}
+.sort-pill:hover:not(.active){border-color:var(--fg2);color:var(--fg)}
+
+/* GRILLE */
+.grid-wrap{padding:0 max(16px,env(safe-area-inset-left,0px)) 40px;max-width:1100px;margin:0 auto}
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(min-width:700px){.product-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.product-grid{grid-template-columns:repeat(4,1fr)}}
+
+/* CARTE (clic = ouvre le lien du produit) */
+.card{display:block;background:var(--surface);border-radius:14px;overflow:hidden;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(204,17,17,.18)}
+.card-img{position:relative;aspect-ratio:1;background:#fff;overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:contain;display:block}
+.badge{position:absolute;top:8px;left:8px;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;padding:4px 10px;border-radius:999px}
+.card-body{padding:12px 12px 14px}
+.card-name{font-size:.9rem;font-weight:700;line-height:1.3;margin-bottom:8px}
+.card-price{font-size:1.1rem;font-weight:800;color:var(--accent);margin-bottom:8px;font-variant-numeric:tabular-nums}
+.card-cat{font-size:.75rem;color:var(--fg2);margin-bottom:8px}
+.card-note{font-size:.78rem;font-style:italic;color:var(--fg2);border-left:3px solid var(--border);padding-left:8px}
+.card:hover .empty{grid-column:1/-1;text-align:center;color:var(--fg2);padding:40px 0;font-size:.9rem}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">MatizJ<span>Spreadsheet</span></a>
-  <div class="nav-links">
-    <a href="#tracking">Track Parcel</a>
-    <a href="#sellers">Sellers</a>
-    <a href="https://discord.gg/2jyqMFSXjJ" target="_blank" class="social">Discord</a>
-    <a href="https://t.me/bbdbuyofficial" target="_blank" class="social">Telegram</a>
-    <a href="https://www.bddbuyeu.com/register?inviteCode=wBxYkx" target="_blank" class="nav-cta">Get $200 Coupons</a>
-  </div>
+<nav class="nav">
+  <a href="#" class="logo">Matiz<span class="j">J</span></a>
+  <button class="hamburger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="menu" id="menu" hidden></div>
 </nav>
 
-<!-- HERO -->
-<header class="hero">
-  <h1>MatizJ Spreadsheet<br><em>Best Reps & QC Database</em></h1>
-  <p>The ultimate spreadsheet for finding quality replica products, QC photos, and tracking your parcels. Search thousands of verified reps from trusted sellers.</p>
+<section class="hero">
+  <h1 id="siteTitle"></h1>
+</section>
 
-  <div class="controls">
-    <div class="search-row">
-      <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
-      <input type="text" id="searchInput" placeholder="Search products, brands, categories…" oninput="filterProducts()" />
-    </div>
-    <div class="filter-row">
-      <div class="cats" id="catBtns">
-        <button class="cat-btn active" data-cat="all" onclick="setCat(this,'all')">All Products</button>
-        <button class="cat-btn" data-cat="shoes" onclick="setCat(this,'shoes')">Shoes</button>
-        <button class="cat-btn" data-cat="pants" onclick="setCat(this,'pants')">Pants</button>
-        <button class="cat-btn" data-cat="shirts" onclick="setCat(this,'shirts')">Shirts</button>
-        <button class="cat-btn" data-cat="jackets" onclick="setCat(this,'jackets')">Jackets</button>
-        <button class="cat-btn" data-cat="jewelry" onclick="setCat(this,'jewelry')">Jewelry</button>
-        <button class="cat-btn" data-cat="tshirts" onclick="setCat(this,'tshirts')">T-Shirts</button>
-        <button class="cat-btn" data-cat="sweaters" onclick="setCat(this,'sweaters')">Sweaters</button>
-        <button class="cat-btn" data-cat="tracksuits" onclick="setCat(this,'tracksuits')">Tracksuits</button>
-        <button class="cat-btn" data-cat="accessories" onclick="setCat(this,'accessories')">Accessories</button>
-        <button class="cat-btn" data-cat="electronics" onclick="setCat(this,'electronics')">Electronics</button>
-      </div>
-      <select class="sort-select" id="sortSelect" onchange="filterProducts()">
-        <option value="trending">Trending</option>
-        <option value="price_asc">Price ↑</option>
-        <option value="price_desc">Price ↓</option>
-        <option value="az">A → Z</option>
-      </select>
-    </div>
-  </div>
-</header>
+<a href="#" class="htb-tab" id="htb" target="_blank" rel="noopener">HOW TO BUY</a>
 
-<!-- MAIN -->
-<div class="main">
-
-  <!-- SIDEBAR -->
-  <aside>
-    <div class="aside-block">
-      <h3>Categories</h3>
-      <a href="#">Shoes</a>
-      <a href="#">Jackets</a>
-      <a href="#">T-Shirts</a>
-      <a href="#">Sweaters</a>
-      <a href="#">Pants</a>
-      <a href="#">Accessories</a>
-      <a href="#">Electronics</a>
-    </div>
-    <div class="aside-block">
-      <h3>Pages</h3>
-      <a href="#">Spreadsheet</a>
-      <a href="#tracking">Track Parcel</a>
-      <a href="#sellers">Trusted Sellers</a>
-      <a href="https://www.bddbuyeu.com/register?inviteCode=wBxYkx" target="_blank" class="red-link">Sign Up & Get $100</a>
-    </div>
-    <div class="aside-block">
-      <h3>Community</h3>
-      <a href="https://discord.gg/2jyqMFSXjJ" target="_blank">Discord</a>
-      <a href="https://t.me/bbdbuyofficial" target="_blank">Telegram</a>
-      <a href="https://discord.gg/2jyqMFSXjJ" target="_blank" class="red-link">Suggest a Product</a>
-    </div>
-  </aside>
-
-  <!-- PRODUCTS -->
-  <section class="products-area">
-    <div class="products-grid" id="productsGrid">
-      <div class="loading-state">
-        <div class="spinner"></div>
-        Loading premium products…
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModalBtn()">×</button>
-    <div class="modal-imgs" id="modalImgs">
-      <div class="modal-img-slot">📦</div>
-      <div class="modal-img-slot">📦</div>
-      <div class="modal-img-slot">📦</div>
-    </div>
-    <div class="modal-body">
-      <h2 id="modalName">Product Name</h2>
-      <div class="modal-stats">
-        <div class="stat"><strong id="modalViews">0</strong>Views</div>
-        <div class="stat"><strong id="modalCat">—</strong>Category</div>
-        <div class="stat"><strong id="modalPrice">$0</strong>Price</div>
-      </div>
-      <div class="modal-btns">
-        <button class="btn-buy" id="modalBuy" onclick="window.open('#','_blank')">Buy Now</button>
-        <button class="btn-qc">View Original</button>
-      </div>
-    </div>
+<div class="filter-box">
+  <input class="search-input" type="text" id="searchInput" placeholder="Search MatizJ reps, brands, categories... (e.g. Nike, Shoes)">
+  <div class="cats" id="cats"></div>
+  <div class="sort-row">
+    <span class="sort-label">Sort</span>
+    <button class="sort-pill active" data-sort="default">Trending</button>
+    <button class="sort-pill" data-sort="price-desc">Price ↑</button>
+    <button class="sort-pill" data-sort="price-asc">Price ↓</button>
+    <button class="sort-pill" data-sort="az">A → Z</button>
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">MatizJ<span>Spreadsheet</span></div>
-      <div class="footer-copy">© 2025 MatizJSpreadsheet — The best spreadsheet for reps & QC.</div>
-    </div>
-    <div class="footer-links">
-      <a href="#">How to Buy</a>
-      <a href="#tracking">Track Parcel</a>
-      <a href="#sellers">Trusted Sellers</a>
-      <a href="https://discord.gg/2jyqMFSXjJ" target="_blank">Discord</a>
-    </div>
-  </div>
-</footer>
+<div class="grid-wrap">
+  <div class="product-grid" id="productGrid"></div>
+</div>
 
 <script>
-  // ── SAMPLE DATA (replace with real API / sheet data)
-  const PRODUCTS = [
-    { id:1,  name:"Air Jordan 1 Retro High OG",        cat:"shoes",       price:89,  views:4821, badge:"Hot" },
-    { id:2,  name:"Nike Dunk Low Panda",                cat:"shoes",       price:72,  views:3904 },
-    { id:3,  name:"Yeezy Boost 350 V2 Zebra",          cat:"shoes",       price:95,  views:5102, badge:"Hot" },
-    { id:4,  name:"Stone Island CP Company Jacket",    cat:"jackets",     price:138, views:2341 },
-    { id:5,  name:"Moncler Maya Down Jacket",           cat:"jackets",     price:165, views:1899 },
-    { id:6,  name:"Supreme Box Logo Tee",               cat:"tshirts",     price:45,  views:6230, badge:"Trending" },
-    { id:7,  name:"Off-White Arrow Tee",                cat:"tshirts",     price:52,  views:3100 },
-    { id:8,  name:"Essentials Fear of God Hoodie",      cat:"sweaters",    price:68,  views:2780 },
-    { id:9,  name:"Palace Tri-Ferg Hoodie",             cat:"sweaters",    price:74,  views:2110 },
-    { id:10, name:"Carhartt WIP Regular Fit Pants",     cat:"pants",       price:58,  views:1820 },
-    { id:11, name:"Represent Owners Club Sweatpants",   cat:"pants",       price:63,  views:1540 },
-    { id:12, name:"Rolex Submariner Date",              cat:"jewelry",     price:220, views:7840, badge:"Hot" },
-    { id:13, name:"AP Royal Oak 41mm",                  cat:"jewelry",     price:195, views:6520, badge:"Hot" },
-    { id:14, name:"Nike Tech Fleece Tracksuit",         cat:"tracksuits",  price:88,  views:3340 },
-    { id:15, name:"Adidas x Gucci Tracksuit",           cat:"tracksuits",  price:142, views:2890, badge:"New" },
-    { id:16, name:"Louis Vuitton Card Holder",          cat:"accessories", price:55,  views:4100 },
-    { id:17, name:"Dior Saddle Bag Mini",               cat:"accessories", price:135, views:3760 },
-    { id:18, name:"AirPods Pro 2 Clone",                cat:"electronics", price:48,  views:9910, badge:"Trending" },
-    { id:19, name:"Samsung Galaxy S25 Clone",           cat:"electronics", price:92,  views:5440 },
-    { id:20, name:"Levi's 501 Original Fit",            cat:"pants",       price:34,  views:1210 },
-    { id:21, name:"Rick Owens Drkshdw Tee",             cat:"tshirts",     price:66,  views:1870 },
-    { id:22, name:"New Balance 550 Grey",               cat:"shoes",       price:67,  views:2660 },
-    { id:23, name:"Prada Re-Nylon Jacket",              cat:"jackets",     price:155, views:2050, badge:"New" },
-    { id:24, name:"Cartier Love Bracelet",              cat:"jewelry",     price:88,  views:5120 },
-  ];
+/* ════════════════════════════════════════════════════════════════
+   1) RÉGLAGES DU SITE  — modifie les textes ici
+   ════════════════════════════════════════════════════════════════ */
+const SITE = {
+  title: "MatizJ Spreadsheet — Best Reps & QC Database",
+  currency: "€",            // "€", "$", etc.
+  currencyBefore: false,    // false → "14 €"   |   true → "$14"
+  howToBuyUrl: "https://example.com",   // lien du bouton rouge "HOW TO BUY" sur le côté
 
-  let currentCat = 'all';
+  // Liens du menu (les 3 barres en haut à droite) — ajoute / supprime des lignes
+  links: [
+    { text: "📚 TUTO commander", url: "https://example.com" },
+    { text: "🙋 AIDE",           url: "https://example.com" }
+  ]
+};
 
-  function setCat(el, cat) {
-    currentCat = cat;
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    el.classList.add('active');
-    filterProducts();
+/* ════════════════════════════════════════════════════════════════
+   2) CATÉGORIES  — "id" = ce que tu écris dans "cat" des produits
+   ════════════════════════════════════════════════════════════════ */
+const CATEGORIES = [
+  { id: "all",         label: "All Products" },
+  { id: "shoes",       label: "Shoes" },
+  { id: "pants",       label: "Pants" },
+  { id: "shirt",       label: "Shirt" },
+  { id: "tshirts",     label: "T-shirts" },
+  { id: "sweaters",    label: "Sweaters" },
+  { id: "accessories", label: "Accessories" }
+];
+
+/* ════════════════════════════════════════════════════════════════
+   3) PRODUITS  — copie/colle un bloc { ... }, modifie, et c'est tout !
+   ────────────────────────────────────────────────────────────────
+   name  : nom affiché
+   price : prix (nombre, ex: 14 ou 12.5)
+   cat   : une catégorie de la liste du dessus (shoes, pants, shirt,
+           tshirts, sweaters, accessories)
+   image : lien d'une image (https://...) OU chemin d'un fichier mis
+           sur GitHub (ex: "images/veste.jpg"). Vide = image par défaut.
+   link  : lien du produit (AliExpress, Taobao, 1688, lovegobuy...)
+   note  : petit texte (ex: la taille) — optionnel, peut être ""
+   top   : true = badge ⭐ TOP — optionnel
+   ════════════════════════════════════════════════════════════════ */
+const PRODUCTS = [
+  {
+    name: "Veste en jean",
+    price: 14,
+    cat: "sweaters",
+    image: "",
+    link: "https://www.aliexpress.com/",
+    note: "",
+    top: true
+  },
+  {
+    name: "Jean",
+    price: 10,
+    cat: "pants",
+    image: "",
+    link: "https://www.aliexpress.com/",
+    note: "",
+    top: true
+  },
+  {
+    name: "T-shirt basic",
+    price: 6,
+    cat: "tshirts",
+    image: "",
+    link: "https://www.aliexpress.com/",
+    note: "",
+    top: false
   }
+];
 
-  function filterProducts() {
-    const q = document.getElementById('searchInput').value.toLowerCase();
-    const sort = document.getElementById('sortSelect').value;
+/* ════════════════════════════════════════════════════════════════
+   ⚠️ NE PAS TOUCHER EN DESSOUS (sauf si tu sais coder)
+   ════════════════════════════════════════════════════════════════ */
+const PLACEHOLDER = "data:image/svg+xml;utf8," + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#f2f2f2"/>' +
+  '<text x="100" y="108" font-family="sans-serif" font-size="14" fill="#999" text-anchor="middle">Pas d\'image</text></svg>');
 
-    let list = PRODUCTS.filter(p => {
-      const matchCat = currentCat === 'all' || p.cat === currentCat;
-      const matchQ   = !q || p.name.toLowerCase().includes(q) || p.cat.includes(q);
-      return matchCat && matchQ;
-    });
+let currentCat = "all", currentSort = "default", query = "";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtPrice = n => {
+  const v = Number.isInteger(n) ? n : n.toFixed(2);
+  return SITE.currencyBefore ? SITE.currency + v : v + " " + SITE.currency;
+};
+const catLabel = id => (CATEGORIES.find(c => c.id === id) || {label: id}).label;
 
-    if (sort === 'price_asc')  list.sort((a,b) => a.price - b.price);
-    if (sort === 'price_desc') list.sort((a,b) => b.price - a.price);
-    if (sort === 'az')         list.sort((a,b) => a.name.localeCompare(b.name));
-    if (sort === 'trending')   list.sort((a,b) => b.views - a.views);
+// En-tête
+$("siteTitle").textContent = SITE.title;
+document.title = "MatizJ Spreadsheet";
+$("htb").href = SITE.howToBuyUrl;
+$("menu").innerHTML = (SITE.links || []).map(l =>
+  `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.text)}</a>`).join("");
+$("burger").addEventListener("click", () => { $("menu").hidden = !$("menu").hidden; });
 
-    renderGrid(list);
-  }
+// Catégories
+$("cats").innerHTML = CATEGORIES.map(c =>
+  `<button class="cat-pill ${c.id === "all" ? "active" : ""}" data-cat="${esc(c.id)}">${esc(c.label)}</button>`).join("");
 
-  function renderGrid(list) {
-    const grid = document.getElementById('productsGrid');
-    if (!list.length) {
-      grid.innerHTML = `<div class="loading-state" style="color:var(--muted)">No products found.</div>`;
-      return;
-    }
-    grid.innerHTML = list.map(p => `
-      <div class="product-card" onclick="openModal(${p.id})">
-        <div class="product-img">
-          <span class="placeholder-icon">📦</span>
-          ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
-        </div>
-        <div class="product-info">
-          <div class="product-cat">${p.cat}</div>
-          <div class="product-name">${p.name}</div>
-          <div class="product-meta">
-            <span class="product-price">$${p.price}</span>
-            <span class="product-views">${p.views.toLocaleString()} views</span>
-          </div>
-          <div class="product-actions">
-            <button class="btn-buy" onclick="event.stopPropagation()">Buy Now</button>
-            <button class="btn-qc" onclick="event.stopPropagation()">QC</button>
-          </div>
-        </div>
+function getFiltered() {
+  const q = query.toLowerCase();
+  const list = PRODUCTS.filter(p =>
+    (currentCat === "all" || p.cat === currentCat) &&
+    (!q || p.name.toLowerCase().includes(q) || catLabel(p.cat).toLowerCase().includes(q)));
+  if (currentSort === "price-asc") list.sort((a, b) => a.price - b.price);
+  else if (currentSort === "price-desc") list.sort((a, b) => b.price - a.price);
+  else if (currentSort === "az") list.sort((a, b) => a.name.localeCompare(b.name));
+  return list;
+}
+
+function render() {
+  const grid = $("productGrid");
+  const list = getFiltered();
+  if (!list.length) { grid.innerHTML = '<p class="empty">Aucun produit trouvé.</p>'; return; }
+  grid.innerHTML = list.map(p => `
+    <a class="card" href="${esc(p.link || "#")}" target="_blank" rel="noopener noreferrer">
+      <div class="card-img">
+        ${p.top ? '<span class="badge">⭐ TOP</span>' : ""}
+        <img src="${esc(p.image || PLACEHOLDER)}" alt="${esc(p.name)}" loading="lazy" referrerpolicy="no-referrer"
+             onerror="this.onerror=null;this.src='${PLACEHOLDER.replace(/'/g, "\\'")}'">
       </div>
-    `).join('');
-  }
+      <div class="card-body">
+        <div class="card-name">${esc(p.name)}</div>
+        <div class="card-price">${fmtPrice(p.price)}</div>
+        <div class="card-cat">🏷 ${esc(catLabel(p.cat))}</div>
+        ${p.note ? `<div class="card-note">${esc(p.note)}</div>` : ""}
+      </div>
+    </a>`).join("");
+}
 
-  function openModal(id) {
-    const p = PRODUCTS.find(x => x.id === id);
-    if (!p) return;
-    document.getElementById('modalName').textContent  = p.name;
-    document.getElementById('modalViews').textContent = p.views.toLocaleString();
-    document.getElementById('modalCat').textContent   = p.cat;
-    document.getElementById('modalPrice').textContent = '$' + p.price;
-    document.getElementById('modalOverlay').classList.add('open');
-  }
+$("cats").addEventListener("click", e => {
+  const b = e.target.closest(".cat-pill"); if (!b) return;
+  document.querySelectorAll(".cat-pill").forEach(x => x.classList.remove("active"));
+  b.classList.add("active"); currentCat = b.dataset.cat; render();
+});
+document.querySelectorAll(".sort-pill").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".sort-pill").forEach(x => x.classList.remove("active"));
+  b.classList.add("active"); currentSort = b.dataset.sort; render();
+}));
+let t; $("searchInput").addEventListener("input", e => {
+  clearTimeout(t); t = setTimeout(() => { query = e.target.value; render(); }, 150);
+});
 
-  function closeModalBtn() {
-    document.getElementById('modalOverlay').classList.remove('open');
-  }
-
-  function closeModal(e) {
-    if (e.target.id === 'modalOverlay') closeModalBtn();
-  }
-
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
-
-  // Initial render
-  filterProducts();
+render();
 </script>
 </body>
 </html>
-
