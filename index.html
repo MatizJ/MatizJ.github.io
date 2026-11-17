@@ -23,7 +23,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--f
 a{color:inherit;text-decoration:none}
 
 /* NAV */
-.nav{background:var(--nav-bg);border-bottom:3px solid var(--accent);display:flex;align-items:center;justify-content:space-between;padding:16px max(16px,env(safe-area-inset-left,0px));position:relative}
+.nav{background:var(--nav-bg);border-bottom:3px solid var(--accent);display:flex;align-items:center;justify-content:center;padding:16px max(16px,env(safe-area-inset-left,0px));position:relative}
 .logo{font-size:1.5rem;font-weight:800;letter-spacing:.06em;color:#fff;text-transform:uppercase}
 .logo .j{color:var(--accent)}
 .hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
@@ -79,8 +79,6 @@ a{color:inherit;text-decoration:none}
 
 <nav class="nav">
   <a href="#" class="logo">Matiz<span class="j">J</span></a>
-  <button class="hamburger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-  <div class="menu" id="menu" hidden></div>
 </nav>
 
 <section class="hero">
@@ -129,9 +127,10 @@ const CATEGORIES = [
   { id: "all",         label: "All Products" },
   { id: "shoes",       label: "Shoes" },
   { id: "pants",       label: "Pants" },
-  { id: "shirt",       label: "Shirt" },
+  { id: "short",       label: "Short" },
   { id: "tshirts",     label: "T-shirts" },
-  { id: "sweaters",    label: "Sweaters" },
+  { id: "sweaters",    label: "Pull" },
+  { id: "vestes",       label: "Veste / Doudoune" },
   { id: "accessories", label: "Accessories" }
 ];
 
@@ -140,8 +139,8 @@ const CATEGORIES = [
    ────────────────────────────────────────────────────────────────
    name  : nom affiché
    price : prix (nombre, ex: 14 ou 12.5)
-   cat   : une catégorie de la liste du dessus (shoes, pants, shirt,
-           tshirts, sweaters, accessories)
+   cat   : une catégorie de la liste du dessus (shoes, pants, short,
+           tshirts, sweaters, vestes, accessories)
    image : lien d'une image (https://...) OU chemin d'un fichier mis
            sur GitHub (ex: "images/veste.jpg"). Vide = image par défaut.
    link  : lien du produit (AliExpress, Taobao, 1688, lovegobuy...)
@@ -152,7 +151,7 @@ const PRODUCTS = [
   {
     name: "Veste en jean",
     price: 14,
-    cat: "sweaters",
+    cat: "vestes",
     image: "",
     link: "https://www.aliexpress.com/",
     note: "",
@@ -198,9 +197,6 @@ const catLabel = id => (CATEGORIES.find(c => c.id === id) || {label: id}).label;
 $("siteTitle").textContent = SITE.title;
 document.title = "MatizJ Spreadsheet";
 $("htb").href = SITE.howToBuyUrl;
-$("menu").innerHTML = (SITE.links || []).map(l =>
-  `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.text)}</a>`).join("");
-$("burger").addEventListener("click", () => { $("menu").hidden = !$("menu").hidden; });
 
 // Catégories
 $("cats").innerHTML = CATEGORIES.map(c =>
