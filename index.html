@@ -159,10 +159,13 @@ const CATEGORIES = [
            sur GitHub (ex: "images/veste.jpg"). Vide = image par défaut.
    link  : lien du produit (AliExpress, Taobao, 1688, lovegobuy...)
    note  : petit texte (ex: la taille) — optionnel, peut être ""
-   qc    : liens des photos QC (bouton 📸 QC sur l'article)
-           ["lien1", "lien2", ...] = bouton + photos
-           les "" vides sont ignorés ; supprime la ligne qc ou mets
-           false pour ne pas avoir de bouton QC sur cet article
+   qc    : photos QC de l'article (bouton 📸 QC)
+           colle TOUS les liens d'un coup entre les ` ` (un par ligne,
+           comme les donne postimg en "Lien direct / 1 colonne") :
+           qc: `https://i.postimg.cc/aaa/IMG-1.jpg
+                https://i.postimg.cc/bbb/IMG-2.jpg`
+           vide = bouton quand même, "bientôt disponibles"
+           qc: false = pas de bouton sur cet article
    ════════════════════════════════════════════════════════════════ */
 const PRODUCTS = [
   // ── Article 1 ──
@@ -173,7 +176,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/qBjg6dHn/IMG-6941.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/WEIDIAN/7234458934?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 2 ──
   {
@@ -183,7 +186,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/wBQ9Kh67/IMG-6888.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/847633328328?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 3 ──
   {
@@ -193,7 +196,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/vmhw2bz9/IMG-6886.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/837741351136?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 4 ──
   {
@@ -203,7 +206,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/pT9xm3f5/IMG-6891.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/1047051690002?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 5 ──
   {
@@ -213,7 +216,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/g07bb4CG/1794940572416.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/836982411657?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 6 ──
   {
@@ -223,7 +226,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/KvfVyJLZ/IMG-6897.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/803133867151?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 7 ──
   {
@@ -233,7 +236,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/nhMdfZpT/IMG-6901.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/930794750829?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 8 ──
   {
@@ -243,7 +246,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/rsQ97ZHJ/IMG-6904.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/768691640137?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 9 ──
   {
@@ -253,7 +256,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/nzxYrtb5/1794941257088.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/1067352573658?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 10 ──
   {
@@ -263,7 +266,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/DyRGmK1Q/1794941338075.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/803719892434?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 11 ──
   {
@@ -273,7 +276,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/2jMy773B/IMG-6920.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/WEIDIAN/7120607337?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 12 ──
   {
@@ -283,7 +286,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/YCkWQzyg/IMG-6921.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/1061933312543?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 13 ──
   {
@@ -293,7 +296,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/J0Nhh98B/IMG-6574.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/WEIDIAN/7563953986?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 14 ──
   {
@@ -303,7 +306,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/mDMLd0PH/1794947937375.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/997094925830?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 15 ──
   {
@@ -313,17 +316,17 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/nhPnnH7D/IMG-6925.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/WEIDIAN/7292235515?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 16 ──
   {
     name: "pull nike tech (sans capuche)",
     price: "10.69€",
     cat: "clothes",
-    image: "https://i.postimg.cc/dtJKTZQG/IMG-6956.jpg",                    // colle le lien de l'image ici
+    image: "https://i.postimg.cc/wTWpk6wL/IMG-6863.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/788825292220?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 17 ──
   {
@@ -333,7 +336,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/xCyrNYkq/IMG-6927.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/WEIDIAN/7651097190?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 18 ──
   {
@@ -343,7 +346,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/VvGVXNzX/IMG-6928.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/932279885646?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 19 ──
   {
@@ -353,7 +356,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/zfC207qk/IMG-6929.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/WEIDIAN/6782347054?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 20 ──
   {
@@ -363,7 +366,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/VsGGGdcf/IMG-6930.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/972010435803?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 21 ──
   {
@@ -373,7 +376,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/bJYgLjCQ/IMG-6931.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/WEIDIAN/7621063082?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 22 ──
   {
@@ -383,7 +386,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/CKSsLgVm/IMG-6932.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/WEIDIAN/7812516403?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 23 ──
   {
@@ -393,7 +396,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/Kz4LRcp7/IMG-6933.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/741818671895?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 24 ──
   {
@@ -403,7 +406,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/VkBhzwh0/IMG-6936.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/960620734096?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 25 ──
   {
@@ -413,7 +416,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/RC6bNK8S/IMG-6937.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/921768902282?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 26 ──
   {
@@ -423,7 +426,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/W4YX41wp/1794948524550.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/896993716575?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 27 ──
   {
@@ -433,7 +436,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/5txXT9ww/IMG-6939.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/941014122386?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 28 ──
   {
@@ -443,7 +446,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/QMXFwNpQ/IMG-6940.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/887743970814?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 29 ──
   {
@@ -453,7 +456,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/prJjp0M8/IMG-6942.webp",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/WEIDIAN/7781980815?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 30 ──
   {
@@ -463,7 +466,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/3xRGxCSw/IMG-6943.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/904529443984?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 31 ──
   {
@@ -473,7 +476,7 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/858fw819/Photoroom-20261117-215708.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/913871043719?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 32 ──
   {
@@ -483,7 +486,7 @@ const PRODUCTS = [
     image: "",                    // colle le lien de l'image ici
     link: "",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 33 ──
   {
@@ -493,7 +496,7 @@ const PRODUCTS = [
     image: "",                    // colle le lien de l'image ici
     link: "",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   },
   // ── Article 34 ──
   {
@@ -503,7 +506,7 @@ const PRODUCTS = [
     image: "",                    // colle le lien de l'image ici
     link: "",                     // colle le lien du produit ici
     note: "",
-    qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
+    qc: ``                       // colle ici TOUS les liens QC d'un coup (entre les ` `)
   }
 ];
 
@@ -530,8 +533,11 @@ const fmtPrice = n => {
 };
 const priceNum = x => typeof x === "number" ? x : (parseFloat(String(x ?? "").replace(",", ".").replace(/[^0-9.]/g, "")) || 0);
 const catLabel = id => (CATEGORIES.find(c => c.id === id) || {label: id}).label;
-const hasQC = p => p.qc === true || (Array.isArray(p.qc) && p.qc.length > 0);
-const qcPhotos = p => (Array.isArray(p.qc) ? p.qc : []).filter(u => String(u || "").trim());
+const hasQC = p => p.qc !== false && p.qc != null;
+const qcPhotos = p => {
+  const raw = Array.isArray(p.qc) ? p.qc.join("\n") : (typeof p.qc === "string" ? p.qc : "");
+  return raw.split(/[\s,]+/).map(u => u.trim()).filter(u => /^https?:\/\//i.test(u));
+};
 const catIcon = id => (CATEGORIES.find(c => c.id === id) || {}).icon || "🏷";
 
 // En-tête
@@ -611,4 +617,3 @@ render();
 </script>
 </body>
 </html>
-
