@@ -200,8 +200,7 @@ const PRODUCTS = [
     name: "t-shirt simple",
     price: "5.34€",
     cat: "clothes",
-    image: "https://i.postimg.cc/pT9xm3f5/IMG-6891.jpg
-",                    // colle le lien de l'image ici
+    image: "https://i.postimg.cc/pT9xm3f5/IMG-6891.jpg",                    // colle le lien de l'image ici
     link: "https://link.bbdbuy.com/goods/1688/1047051690002?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
     qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
@@ -232,7 +231,7 @@ const PRODUCTS = [
     price: "11.91€",
     cat: "clothes",
     image: "https://i.postimg.cc/nhMdfZpT/IMG-6901.webp",                    // colle le lien de l'image ici
-    link: "",                     // colle le lien du produit ici
+    link: "https://link.bbdbuy.com/goods/1688/930794750829?inviteCode=matizJ",                     // colle le lien du produit ici
     note: "",
     qc: ["", "", "", ""]          // colle les liens des photos QC (ajoute/supprime des "" si besoin)
   },
@@ -520,9 +519,16 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmtPrice = n => {
   if (n === "" || n == null) return "";
+  if (typeof n === "string") {
+    const t = n.trim();
+    if (/[^0-9.,\s]/.test(t)) return t;               // contient déjà un symbole (ex: "4.89€")
+    n = parseFloat(t.replace(",", "."));
+    if (isNaN(n)) return t;
+  }
   const v = Number.isInteger(n) ? n : n.toFixed(2);
   return SITE.currencyBefore ? SITE.currency + v : v + " " + SITE.currency;
 };
+const priceNum = x => typeof x === "number" ? x : (parseFloat(String(x ?? "").replace(",", ".").replace(/[^0-9.]/g, "")) || 0);
 const catLabel = id => (CATEGORIES.find(c => c.id === id) || {label: id}).label;
 const hasQC = p => p.qc === true || (Array.isArray(p.qc) && p.qc.length > 0);
 const qcPhotos = p => (Array.isArray(p.qc) ? p.qc : []).filter(u => String(u || "").trim());
@@ -542,8 +548,8 @@ function getFiltered() {
   const list = PRODUCTS.filter(p =>
     (currentCat === "all" || p.cat === currentCat) &&
     (!q || String(p.name || "").toLowerCase().includes(q) || catLabel(p.cat).toLowerCase().includes(q)));
-  if (currentSort === "price-asc") list.sort((a, b) => (+a.price || 0) - (+b.price || 0));
-  else if (currentSort === "price-desc") list.sort((a, b) => (+b.price || 0) - (+a.price || 0));
+  if (currentSort === "price-asc") list.sort((a, b) => priceNum(a.price) - priceNum(b.price));
+  else if (currentSort === "price-desc") list.sort((a, b) => priceNum(b.price) - priceNum(a.price));
   else if (currentSort === "az") list.sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
   return list;
 }
@@ -605,3 +611,4 @@ render();
 </script>
 </body>
 </html>
+
